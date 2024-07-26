@@ -1,5 +1,6 @@
 import './App.css';
 import React, {useState} from 'react';
+import { evaluate } from 'mathjs'; 
 
 function App() {
   const [value, setValue] = useState('');
@@ -15,8 +16,9 @@ function App() {
     } 
     else if (buttonValue === '=') {
       try {
-        setValue(eval(value).toString());
+        setValue(evaluate(value).toString());
       } catch {
+        // console.error('Error evaluating expression:', error);
         setValue('Error');
       }
     } 
@@ -30,7 +32,7 @@ function App() {
       <div className='calculator'>
           <form action=''>
             <div className='display'>
-            <input type="text" value={value} />
+            <input type="text" value={value} readOnly />
             </div>
             <div>
               <input type="button" value="AC" onClick={handleChange} />
